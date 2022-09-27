@@ -4,6 +4,9 @@ import { Button, Form, Grid, Header, Image, Segment } from "semantic-ui-react";
 import userService from "../../utils/userService";
 import { useNavigate } from "react-router-dom";
 
+// Utility functions that don't pertain to the component can 
+// be defined outside it
+
 function isPasswordMatch(passwordOne, passwordConf) {
   return passwordOne === passwordConf;
 }
@@ -18,8 +21,11 @@ export default function SignUpPage(props) {
     username: "",
     email: "",
     password: "",
-    passwordConf: ""
+    passwordConf: "",
+    bio: "",
   });
+
+  const [selectedFile, setSelectedFile] = useState("");
 
   // initialized the react router hook, which allows you to programatically
   // change routes, aka after our signup call in the handleSubmit
@@ -42,7 +48,7 @@ export default function SignUpPage(props) {
 
     const formData = new FormData(); //< - this constructor from the browser allows us to create data
     // now we can set key value pairs on the formData
-
+    formData.append("photo", selectedFile);
     // Line by line tactic
     // formData.append('username', state.username);
     // formData.append('email', state.email);
@@ -65,21 +71,18 @@ export default function SignUpPage(props) {
     );
 
     try {
-      await userService.signup(formData); // THIS IS WHERE WE ARE MAKING A REQUEST TO THE SERVER, the response is handled inside function .thens, go at the look at the function
-      // After the line above,
-      // the new token is in localstorage,
-      // so now we can update state
-      props.handleSignUpOrLogin(); // <- call the function from the app component
-      // that gets the token from localstorage, and sets in our App's state
- 
-      // navigate whereever after the user has logged in
-      navigate("/"); // this accepts a route you defined in your App.js
+      await userService.signup(formData);
+      props.handleSignUpOrLogin();
+      navigate("/"); 
     } catch (err) {
-      // the error comes from the throw statement in the signup functions
-      // .then
       console.log(err);
       setError({message: err.message, passwordError: false});
     }
+  }
+
+  function handleFileInput(e) {
+    console.log(e.target.files, " < - this is e.target.files!");
+    setSelectedFile(e.target.files[0]);
   }
 
   return (
@@ -90,7 +93,7 @@ export default function SignUpPage(props) {
     >
       <Grid.Column style={{ maxWidth: 450 }}>
         <Header as="h2" color="blue" textAlign="center">
-          <Image src="https://cdn-icons-png.flaticon.com/512/744/744502.png" /> Sign Up
+          <Image src="https://cdn-icons-png.flaticon.com/512/744/744502.png"  /> Sign Up
         </Header>
         <Form onSubmit={handleSubmit}>
           <Segment stacked>
@@ -127,6 +130,14 @@ export default function SignUpPage(props) {
               onChange={handleChange}
               required
             />
+            <Form.Field>
+              <Form.Input
+                type="file"
+                name="photo"
+                placeholder="upload image"
+                onChange={handleFileInput}
+              />
+            </Form.Field>
             <Button type="submit" className="btn">
               Signup
             </Button>
