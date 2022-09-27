@@ -8,8 +8,4 @@ router.post('/signup', upload.single('photo'), usersCtrl.signup);
 router.post('/login', usersCtrl.login);
 
 /*---------- Protected Routes ----------*/
-
-
-
-
 module.exports = router;
