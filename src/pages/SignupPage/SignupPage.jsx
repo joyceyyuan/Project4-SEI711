@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
-import { Button, Form, Grid, Header, Image, Segment } from "semantic-ui-react";
+import { Button, Form, Grid, Header, Image, Message, Segment } from "semantic-ui-react";
 import userService from "../../utils/userService";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 // Utility functions that don't pertain to the component can 
 // be defined outside it
@@ -16,13 +16,12 @@ export default function SignUpPage(props) {
     message: '',
     passwordError: false
   });
-  
+
   const [state, setState] = useState({
     username: "",
     email: "",
     password: "",
     passwordConf: "",
-    bio: "",
   });
 
   const [selectedFile, setSelectedFile] = useState("");
@@ -41,8 +40,8 @@ export default function SignUpPage(props) {
   async function handleSubmit(e) {
     e.preventDefault(); // this stop the browser from submitting the form!
 
-    if (!isPasswordMatch(state.password, state.passwordConf)) return setError({message: 'Passwords Must Match!', passwordError: true});
-    setError({message: '', passwordError: false})
+    if (!isPasswordMatch(state.password, state.passwordConf)) return setError({ message: 'Passwords Must Match!', passwordError: true });
+    setError({ message: '', passwordError: false })
     // Create formData, so we can send over our file, using multipart/formdata header
     // which sends over the basic inputs, and then the file
 
@@ -73,10 +72,10 @@ export default function SignUpPage(props) {
     try {
       await userService.signup(formData);
       props.handleSignUpOrLogin();
-      navigate("/"); 
+      navigate("/");
     } catch (err) {
       console.log(err);
-      setError({message: err.message, passwordError: false});
+      setError({ message: err.message, passwordError: false });
     }
   }
 
@@ -93,7 +92,7 @@ export default function SignUpPage(props) {
     >
       <Grid.Column style={{ maxWidth: 450 }}>
         <Header as="h2" color="blue" textAlign="center">
-          <Image src="https://cdn-icons-png.flaticon.com/512/744/744502.png"  /> Sign Up
+          <Image src="https://cdn-icons-png.flaticon.com/512/744/744502.png" /> Sign Up
         </Header>
         <Form onSubmit={handleSubmit}>
           <Segment stacked>
@@ -138,12 +137,19 @@ export default function SignUpPage(props) {
                 onChange={handleFileInput}
               />
             </Form.Field>
-            <Button type="submit" className="btn">
-              Signup
+            <Button color="blue"
+              fluid
+              size="large"
+              type="submit"
+              className="btn">
+              Sign up
             </Button>
           </Segment>
-          {error.message ? <ErrorMessage error={error.message} /> : null}
         </Form>
+        <Message>
+          Already have an account? <Link to="/login">Log In</Link>
+        </Message>
+        {error.message ? <ErrorMessage error={error.message} /> : null}
       </Grid.Column>
     </Grid>
   );
