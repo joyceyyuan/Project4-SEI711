@@ -1,20 +1,41 @@
 const User = require('../models/user');
+const Log = require("../models/log");
 const jwt = require('jsonwebtoken');
 const S3 = require("aws-sdk/clients/s3");
-const s3 = new S3(); // initate the S3 constructor which can talk to aws/s3 our bucket!
-// import uuid to help generate random names
+const s3 = new S3();
 const { v4: uuidv4 } = require("uuid");
-// since we are sharing code, when you pull you don't want to have to edit the
-// the bucket name, thats why we're using an environment variable
+
 const BUCKET_NAME = process.env.AWS_BUCKET_NAME;
 const SECRET = process.env.SECRET;
 
 
 module.exports = {
   signup,
-  login
+  login,
+  profile,
 };
 
+async function profile(req, res) {
+  try {
+    // find the user
+    const user = await User.findOne({ username: req.params.username });
+    if (!user) return res.status(404).json({ error: "User not found" });
+
+    // Find the log by the user
+    //.populate('user') <- user comes from the key on the log model 
+    //   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User'}, // referencing a model < which replaces the id with the userdocument
+    const logs = await Log.find({ user: user._id }).populate("user").exec();
+    res.status(200).json({
+      data: {
+        user: user,
+        logs: logs,
+      }
+    });
+  } catch (err) {
+    console.log(err.message, " <- profile controller");
+    res.status(400).json({ error: "Something went wrong" });
+  }
+}
 async function signup(req, res) {
   console.log(req.body, " req.body in signup", req.file);
 
@@ -67,21 +88,21 @@ async function signup(req, res) {
 
 async function login(req, res) {
   try {
-    const user = await User.findOne({email: req.body.email});
+    const user = await User.findOne({ email: req.body.email });
     console.log(user, ' this user in login')
-    if (!user) return res.status(401).json({err: 'bad credentials'});
+    if (!user) return res.status(401).json({ err: 'bad credentials' });
     // had to update the password from req.body.pw, to req.body password
     user.comparePassword(req.body.password, (err, isMatch) => {
-        
+
       if (isMatch) {
         const token = createJWT(user);
-        res.json({token});
+        res.json({ token });
       } else {
-        return res.status(401).json({err: 'bad credentials'});
+        return res.status(401).json({ err: 'bad credentials' });
       }
     });
   } catch (err) {
-    return res.status(401).json({err: 'error message'});
+    return res.status(401).json({ err: 'error message' });
   }
 }
 
@@ -90,9 +111,9 @@ async function login(req, res) {
 
 function createJWT(user) {
   return jwt.sign(
-    {user}, // data payload
+    { user }, // data payload
     SECRET,
-    {expiresIn: '24h'}
+    { expiresIn: '24h' }
   );
 }
 

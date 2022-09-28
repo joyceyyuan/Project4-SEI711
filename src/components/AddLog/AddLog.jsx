@@ -27,7 +27,7 @@ export default function AddLog(props) {
         const formData = new FormData();
         formData.append("photo", selectedFile);
         formData.append("journal", state.journal);
-        props.handleAddPost(formData); // formData is the data we want to send to the server!
+        props.handleAddLog(formData); // formData is the data we want to send to the server!
     }
 
     return (
