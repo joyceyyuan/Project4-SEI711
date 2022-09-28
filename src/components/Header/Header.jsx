@@ -25,7 +25,7 @@ export default function PageHeader({ loggedUser, handleLogout }) {
                         avatar
                     ></Image>
                 </Link>
-                <span>Welcome</span>
+                <span>Welcome, {loggedUser?.username} </span>
             </Header>
         </Segment>
     )

@@ -4,7 +4,7 @@ const logsCtrl = require('../../controllers/logs');
 const multer = require('multer');
 const upload = multer()
 // /*---------- Public Routes ----------*/
-router.log('/',  upload.single('photo'), logsCtrl.create);
+router.post('/',  upload.single('photo'), logsCtrl.create);
 router.get('/', logsCtrl.index)
 
 
