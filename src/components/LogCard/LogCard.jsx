@@ -27,7 +27,7 @@ export default function LogCard({ log, isProfile, loggedUser }) {
             )}
             <Image src={`${log?.photoUrl}`} wrapped ui={false} />
             <Card.Content>
-                <Card.Description>{log.journal}</Card.Description>
+                <Card.Description>{log.text}</Card.Description>
             </Card.Content>
         </Card>
     );

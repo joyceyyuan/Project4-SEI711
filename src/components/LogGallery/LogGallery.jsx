@@ -14,7 +14,7 @@ export default function LogGallery({ logs, numPhotosCol, isProfile, loading, log
                     <Image src="https://react.semantic-ui.com/images/wireframe/short-paragraph.png" />
                 </Segment>
             ) : null}
-            {logs?.map((log) => {
+            {logs.map((log) => {
                 return (
                     <LogCard
                         log={log}

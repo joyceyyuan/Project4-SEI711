@@ -26,7 +26,7 @@ function create(req, res) {
         try {
             // Using our model to create a document in the logs collection in mongodb
             const log = await Log.create({
-                caption: req.body.caption,
+                text: req.body.text,
                 user: req.user,
                 photoUrl: data.Location, // < this is from aws
             });

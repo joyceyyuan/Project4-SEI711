@@ -24,11 +24,11 @@ export default function ProfilePage({ loggedUser, handleLogout }) {
             // so lets flip the loading state
             setLoading(false);
             setProfileUser(response.data.user);
-            setLogs(response.data.logss);
+            setLogs(response.data.logs);
             console.log(response);
         } catch (err) {
             console.log(err.message);
-            setError("Profile does not exist! You are in the wrong in place"); 
+            setError("Profile does not exist! You are in the wrong in place");
         }
     }, [username]);
 

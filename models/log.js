@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const logSchema = new mongoose.Schema({
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-    title: String, 
+    title: String,
     // title: {type: String, required: true},
     // location: {
     //     type: {
@@ -18,7 +18,7 @@ const logSchema = new mongoose.Schema({
     // startDate: {type: Date, required: true},
     // endDate:{type: Date, required: true},
     photoUrl: String,
-    journal: String,
+    text: String,
 }, {
     timestamps: true
 });

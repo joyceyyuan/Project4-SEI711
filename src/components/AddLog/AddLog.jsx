@@ -5,7 +5,7 @@ import { Button, Form, Segment } from 'semantic-ui-react';
 export default function AddLog(props) {
     // create the state, pay attention to how the inputs are setup!
     const [state, setState] = useState({
-        journal: "",
+        text: "",
     });
     // The function that handles the changes on the input, Look at the inputs for the name of it
     const [selectedFile, setSelectedFile] = useState("");
@@ -17,7 +17,7 @@ export default function AddLog(props) {
 
     function handleChange(e) {
         setState({
-            journal: e.target.value,
+            text: e.target.value,
         });
     }
 
@@ -26,7 +26,7 @@ export default function AddLog(props) {
 
         const formData = new FormData();
         formData.append("photo", selectedFile);
-        formData.append("journal", state.journal);
+        formData.append("text", state.text);
         props.handleAddLog(formData); // formData is the data we want to send to the server!
     }
 
@@ -35,8 +35,8 @@ export default function AddLog(props) {
             <Form autoComplete="off" onSubmit={handleSubmit}>
                 <Form.Input
                     className="form-control"
-                    name="journal"
-                    value={state.journal}
+                    name="text"
+                    value={state.text}
                     placeholder="Write anything about your trip"
                     onChange={handleChange}
                     required
