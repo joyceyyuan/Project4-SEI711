@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
+import { Grid } from "semantic-ui-react";
+import "./Feed.css";
+
 import PageHeader from "../../components/Header/Header";
 import AddLog from "../../components/AddLog/AddLog";
 import LogGallery from "../../components/LogGallery/LogGallery";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import Loading from "../../components/Loader/Loader";
-import { Grid } from "semantic-ui-react";
+
 import * as logAPI from "../../utils/logApi";
 import * as likesAPI from "../../utils/likesApi";
+
 
 export default function Feed({ loggedUser, handleLogout }) {
     const [logs, setLogs] = useState([]);
