@@ -1,5 +1,10 @@
 const mongoose = require('mongoose');
 
+const likesSchema = mongoose.Schema({
+    username: String,
+    userId: { type: mongoose.Schema.Types.ObjectId }
+})
+
 const logSchema = new mongoose.Schema({
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     title: String,
@@ -19,6 +24,7 @@ const logSchema = new mongoose.Schema({
     // endDate:{type: Date, required: true},
     photoUrl: String,
     text: String,
+    likes: [likesSchema] // embedded schema. One Log may have many Likes.
 }, {
     timestamps: true
 });
