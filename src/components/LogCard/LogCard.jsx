@@ -1,8 +1,18 @@
 import React from 'react';
-import { Card, Image } from "semantic-ui-react";
+import { Card, Icon, Image } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
-export default function LogCard({ log, isProfile, loggedUser }) {
+export default function LogCard({ log, isProfile, addLike, removeLike, loggedUser }) {
+    //check if logged in user have liked the post
+    const likedIndex = log.likes.findIndex(
+        (like) => like.username === loggedUser.username
+    );
+    const likeColor = likedIndex > -1 ? "red" : "grey";
+    const clickHandler =
+        likedIndex > -1
+            ? () => removeLike(log.likes[likedIndex]._id) // user has liked the log 
+            : () => addLike(log._id);  // user hasn't liked the log handler
+
     return (
         <Card key={log._id} raised>
             {isProfile ? (
@@ -28,6 +38,15 @@ export default function LogCard({ log, isProfile, loggedUser }) {
             <Image src={`${log?.photoUrl}`} wrapped ui={false} />
             <Card.Content>
                 <Card.Description>{log.text}</Card.Description>
+            </Card.Content>
+            <Card.Content extra textAlign={"right"}>
+                <Icon
+                    name={"heart"}
+                    size="large"
+                    color={likeColor}
+                    onClick={clickHandler}
+                />
+                {log.likes.length} Likes
             </Card.Content>
         </Card>
     );

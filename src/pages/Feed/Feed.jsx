@@ -5,21 +5,43 @@ import LogGallery from "../../components/LogGallery/LogGallery";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import Loading from "../../components/Loader/Loader";
 import { Grid } from "semantic-ui-react";
-import * as logsAPI from "../../utils/logApi";
+import * as logAPI from "../../utils/logApi";
+import * as likesAPI from "../../utils/likesApi";
 
 export default function Feed({ loggedUser, handleLogout }) {
     const [logs, setLogs] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
+    // functions that will make http request to the /logs/api endpoints
+    async function addLike(logId) {
+        try {
+            const response = await likesAPI.create(logId);
+            console.log(response, "from add like");
+            getLogs();
+        } catch (err) {
+            console.log(err, " err from server");
+            setError("error adding like");
+        }
+    }
+
+    async function removeLike(likeId) {
+        try {
+            const response = await likesAPI.removeLike(likeId);
+            console.log(response, " remove like");
+            getLogs();
+        } catch (err) {
+            console.log(err);
+            setError("error removing like");
+        }
+    }
+
     async function handleAddLog(log) {
-        // log, is coming from the addlogForm component, when we call this function onSubmit props.handleAddlog(formData)
         try {
             setLoading(true);
-            const response = await logsAPI.create(log); // waiting for the json to be return from the server and parsed by us!
-            // data is the response from the api, the result of the .then if(res.ok) return res.json() in the create logAPI utils function
+            const response = await logAPI.create(log);
             console.log(response);
-            setLogs([response.data, ...logs]); /// ...logs would keep all the logs in the previous states array
+            setLogs([response.data, ...logs]);
             setLoading(false);
         } catch (err) {
             console.log(err.message);
@@ -29,7 +51,7 @@ export default function Feed({ loggedUser, handleLogout }) {
 
     async function getLogs() {
         try {
-            const response = await logsAPI.getAll();
+            const response = await logAPI.getAll();
             console.log(response, " data");
             setLogs([...response.data]);
             setLoading(false);
@@ -38,11 +60,10 @@ export default function Feed({ loggedUser, handleLogout }) {
             setLoading(false);
         }
     }
-    
+
     useEffect(() => {
-        //Getting logs, C(R)UD
         getLogs();
-    }, []); // This is useEffect runs once when the Feed component loads
+    }, []);
 
     if (error) {
         return (
@@ -79,6 +100,8 @@ export default function Feed({ loggedUser, handleLogout }) {
                         numPhotosCol={1}
                         isProfile={false}
                         loading={loading}
+                        addLike={addLike}
+                        removeLike={removeLike}
                         loggedUser={loggedUser}
                     />
                 </Grid.Column>

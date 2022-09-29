@@ -5,7 +5,9 @@ import LogGallery from "../../components/LogGallery/LogGallery";
 import Header from "../../components/Header/Header";
 import Loading from "../../components/Loader/Loader";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
+
 import userService from "../../utils/userService";
+import * as likesAPI from "../../utils/likesApi";
 import { useParams } from "react-router-dom";
 
 export default function ProfilePage({ loggedUser, handleLogout }) {
@@ -14,8 +16,27 @@ export default function ProfilePage({ loggedUser, handleLogout }) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
-    const { username } = useParams(); // username is defined in the App folder in the Router path="/:username"
+    const { username } = useParams();
 
+    async function addLike(logId) {
+        try {
+            const response = await likesAPI.create(logId);
+            console.log(response, "from add like");
+            getProfile();
+        } catch (err) {
+            console.log(err, " err from server");
+        }
+    }
+
+    async function removeLike(likeId) {
+        try {
+            const response = await likesAPI.removeLike(likeId);
+            console.log(response, " remove like");
+            getProfile();
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
     const getProfile = useCallback(async () => {
         try {
@@ -74,6 +95,8 @@ export default function ProfilePage({ loggedUser, handleLogout }) {
                         numPhotosCol={3}
                         isProfile={true}
                         loading={loading}
+                        addLike={addLike}
+                        removeLike={removeLike}
                         loggedUser={loggedUser}
                     />
                 </Grid.Column>

@@ -1,13 +1,13 @@
 const Log = require('../models/log');
 
 module.exports = {
-    createLike,
+    create,
     deleteLike
 }
 
-async function createLike(req, res) {
+async function create(req, res) {
     try {
-        console.log(req.params,'<-this is req.params from createLike function');
+        console.log(req.params,'<-this is req.params from create function');
         const log = await Log.findById(req.params.id);
         log.likes.push({ username: req.user.username, userId: req.user._id });
         await log.save()// save it
