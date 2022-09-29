@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 
 const logSchema = new mongoose.Schema({
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-    name: String,
-    // location: {type: String,required: true},
+    title: String, 
+    // title: {type: String, required: true},
     // location: {
     //     type: {
     //         type: String, 
@@ -19,7 +19,9 @@ const logSchema = new mongoose.Schema({
     // endDate:{type: Date, required: true},
     photoUrl: String,
     journal: String,
-})
+}, {
+    timestamps: true
+});
 
 
 module.exports = mongoose.model('Log', logSchema);

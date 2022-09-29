@@ -85,72 +85,80 @@ export default function SignUpPage(props) {
   }
 
   return (
-    <Grid
-      textAlign="center"
-      style={{ height: "100vh", width: "100vw" }}
-      verticalAlign="middle"
-    >
-      <Grid.Column style={{ maxWidth: 450 }}>
-        <Header as="h2" color="blue" textAlign="center">
-          <Image src="https://cdn-icons-png.flaticon.com/512/744/744502.png" /> Sign Up
+    <>
+      <Segment clearing>
+        <Header as="h2" color='blue' floated="left">
+          <Image src="https://cdn-icons-png.flaticon.com/512/744/744502.png" size='small' />
+          Welcome to Travelog. Plan, record and share your trips.
         </Header>
-        <Form onSubmit={handleSubmit}>
-          <Segment stacked>
-            <Form.Input
-              name="username"
-              placeholder="username"
-              value={state.username}
-              onChange={handleChange}
-              required
-            />
-            <Form.Input
-              type="email"
-              name="email"
-              placeholder="email"
-              value={state.email}
-              onChange={handleChange}
-              required
-            />
-            <Form.Input
-              error={error.passwordError}
-              name="password"
-              type="password"
-              placeholder="password"
-              value={state.password}
-              onChange={handleChange}
-              required
-            />
-            <Form.Input
-              error={error.passwordError}
-              name="passwordConf"
-              type="password"
-              placeholder="Confirm Password"
-              value={state.passwordConf}
-              onChange={handleChange}
-              required
-            />
-            <Form.Field>
+      </Segment>
+      <Grid
+        textAlign="center"
+        style={{ height: "100vh", width: "100vw" }}
+        verticalAlign="middle"
+      >
+        <Grid.Column style={{ maxWidth: 450 }}>
+          <Header as="h3" color="blue" textAlign="center">
+            Sign Up
+          </Header>
+          <Form onSubmit={handleSubmit}>
+            <Segment stacked>
               <Form.Input
-                type="file"
-                name="photo"
-                placeholder="upload image"
-                onChange={handleFileInput}
+                name="username"
+                placeholder="username"
+                value={state.username}
+                onChange={handleChange}
+                required
               />
-            </Form.Field>
-            <Button color="blue"
-              fluid
-              size="large"
-              type="submit"
-              className="btn">
-              Sign up
-            </Button>
-          </Segment>
-        </Form>
-        <Message>
-          Already have an account? <Link to="/login">Log In</Link>
-        </Message>
-        {error.message ? <ErrorMessage error={error.message} /> : null}
-      </Grid.Column>
-    </Grid>
+              <Form.Input
+                type="email"
+                name="email"
+                placeholder="email"
+                value={state.email}
+                onChange={handleChange}
+                required
+              />
+              <Form.Input
+                error={error.passwordError}
+                name="password"
+                type="password"
+                placeholder="password"
+                value={state.password}
+                onChange={handleChange}
+                required
+              />
+              <Form.Input
+                error={error.passwordError}
+                name="passwordConf"
+                type="password"
+                placeholder="Confirm Password"
+                value={state.passwordConf}
+                onChange={handleChange}
+                required
+              />
+              <Form.Field>
+                <Form.Input
+                  type="file"
+                  name="photo"
+                  placeholder="upload image"
+                  onChange={handleFileInput}
+                />
+              </Form.Field>
+              <Button color="blue"
+                fluid
+                size="large"
+                type="submit"
+                className="btn">
+                Sign up
+              </Button>
+            </Segment>
+          </Form>
+          <Message>
+            Already have an account? <Link to="/login">Log In</Link>
+          </Message>
+          {error.message ? <ErrorMessage error={error.message} /> : null}
+        </Grid.Column>
+      </Grid>
+    </>
   );
 }
