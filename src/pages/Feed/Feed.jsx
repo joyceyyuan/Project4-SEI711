@@ -46,12 +46,25 @@ export default function Feed({ loggedUser, handleLogout }) {
             const response = await logAPI.create(log);
             console.log(response);
             setLogs([response.data, ...logs]);
+            getLogs();
             setLoading(false);
         } catch (err) {
             console.log(err.message);
             setError("Error creating log, please try again");
         }
     }
+
+    async function deleteLog(logId) {
+        try {
+            const response = await logAPI.deleteLog(logId);
+            console.log(response,", delete log");
+            getLogs();
+        } catch (err) {
+            console.log(err);
+            setError("Error deleting log, please try again");
+        }
+    }
+
 
     async function getLogs() {
         try {
@@ -64,6 +77,7 @@ export default function Feed({ loggedUser, handleLogout }) {
             setLoading(false);
         }
     }
+
 
     useEffect(() => {
         getLogs();
@@ -106,6 +120,7 @@ export default function Feed({ loggedUser, handleLogout }) {
                         loading={loading}
                         addLike={addLike}
                         removeLike={removeLike}
+                        deleteLog={deleteLog}
                         loggedUser={loggedUser}
                     />
                 </Grid.Column>

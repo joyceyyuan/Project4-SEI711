@@ -7,8 +7,7 @@ const likesSchema = mongoose.Schema({
 
 const logSchema = new mongoose.Schema({
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-    title: String,
-    // title: {type: String, required: true},
+    title: {type: String, required: true},
     // location: {
     //     type: {
     //         type: String, 
@@ -22,9 +21,14 @@ const logSchema = new mongoose.Schema({
     // },
     // startDate: {type: Date, required: true},
     // endDate:{type: Date, required: true},
-    photoUrl: String,
     text: String,
-    likes: [likesSchema] // embedded schema. One Log may have many Likes.
+    Category: {
+        type: String,
+        enum: ['plan', 'record'],
+        default: 'record'
+    },
+    photoUrl: String,
+    likes: [likesSchema]
 }, {
     timestamps: true
 });

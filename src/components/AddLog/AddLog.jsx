@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Form, TextArea, Segment, Header } from 'semantic-ui-react';
-
+// import "./AddLog.css";
 
 export default function AddLog({handleAddLog}) {
     const [logForm, setLogForm] = useState({
@@ -54,11 +54,9 @@ export default function AddLog({handleAddLog}) {
                     className="form-control"
                     name="text"
                     value={logForm.text}
-                    placeholder="Tell us more about your trip"
+                    placeholder="Tell us more about your trip..."
                     style={{ minHeight: 200 }}
                     onChange={handleChange}
-                    inline
-                    required
                 />
                 <Form.Input
                     className="form-control"

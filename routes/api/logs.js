@@ -6,6 +6,7 @@ const upload = multer()
 // /*---------- Public Routes ----------*/
 router.post('/',  upload.single('photo'), logsCtrl.create);
 router.get('/', logsCtrl.index)
+router.delete('/:id', logsCtrl.deleteLog)
 
 
 /*---------- Protected Routes ----------*/

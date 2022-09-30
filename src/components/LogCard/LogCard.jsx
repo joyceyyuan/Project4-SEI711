@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Icon, Image } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
-export default function LogCard({ log, isProfile, addLike, removeLike, loggedUser }) {
+export default function LogCard({ log, isProfile, addLike, removeLike, deleteLog, loggedUser }) {
     //check if logged in user have liked the post
     const likedIndex = log.likes.findIndex(
         (like) => like.username === loggedUser.username
@@ -12,6 +12,8 @@ export default function LogCard({ log, isProfile, addLike, removeLike, loggedUse
         likedIndex > -1
             ? () => removeLike(log.likes[likedIndex]._id) // user has liked the log 
             : () => addLike(log._id);  // user hasn't liked the log handler
+    console.log(log.user.username, "<-log.user.username");
+    console.log(log.user.photoUrl, "<-log.user.photoUrl");
 
     return (
         <Card key={log._id} raised>
@@ -37,16 +39,21 @@ export default function LogCard({ log, isProfile, addLike, removeLike, loggedUse
             )}
             <Image src={`${log?.photoUrl}`} wrapped ui={false} />
             <Card.Content>
-                <Card.Description>{log.text}</Card.Description>
+                <Card.Description>{log.title}</Card.Description>
+                <Card.Meta>{log.text}</Card.Meta>
             </Card.Content>
             <Card.Content extra textAlign={"right"}>
+                <Icon
+                    name={"trash alternate outline"}
+                    onClick={deleteLog}
+                />
                 <Icon
                     name={"heart"}
                     size="large"
                     color={likeColor}
                     onClick={clickHandler}
                 />
-                {log.likes.length} Likes
+                {log.likes.length}
             </Card.Content>
         </Card>
     );

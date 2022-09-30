@@ -11,10 +11,11 @@ const BUCKET_NAME = process.env.AWS_BUCKET_NAME;
 module.exports = {
     create,
     index,
+    deleteLog
 };
 
 function create(req, res) {
-    console.log(req.body, req.file, req.user); // < req.user comes the config/auth middleware that is mounted before our controllers in the server.js
+    console.log(req.body, req.file, req.user,'<-req.body, req.file, req.user from create log controller');
     const key = `travelog/logs/${uuidv4()}-${req.file.originalname}`;
     const params = { Bucket: BUCKET_NAME, Key: key, Body: req.file.buffer };
 
@@ -26,9 +27,11 @@ function create(req, res) {
         try {
             // Using our model to create a document in the logs collection in mongodb
             const log = await Log.create({
+                title:req.body.title,
                 text: req.body.text,
                 user: req.user,
                 photoUrl: data.Location, // < this is from aws
+                status: req.body.status
             });
             // respond to the client!
             res.status(201).json({ data: log });
@@ -45,6 +48,15 @@ async function index(req, res) {
         // when you fetch the logs
         const logs = await Log.find({}).populate("user").exec();
         res.status(200).json({ data: logs });
+    } catch (err) {
+        res.status(400).json({ err });
+    }
+}
+
+async function deleteLog(req, res) {
+    try {
+        await Log.findByIdAndDelete(req.params.id);
+        res.json({ data: 'log removed' })
     } catch (err) {
         res.status(400).json({ err });
     }

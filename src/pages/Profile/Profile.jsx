@@ -8,7 +8,9 @@ import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 
 import userService from "../../utils/userService";
 import * as likesAPI from "../../utils/likesApi";
+import * as logAPI from "../../utils/logApi";
 import { useParams } from "react-router-dom";
+
 
 export default function ProfilePage({ loggedUser, handleLogout }) {
     const [logs, setLogs] = useState([]);
@@ -32,6 +34,16 @@ export default function ProfilePage({ loggedUser, handleLogout }) {
         try {
             const response = await likesAPI.removeLike(likeId);
             console.log(response, " remove like");
+            getProfile();
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    async function deleteLog(logId) {
+        try {
+            const response = await logAPI.deleteLog(logId);
+            console.log(response, " delete log");
             getProfile();
         } catch (err) {
             console.log(err);
@@ -97,6 +109,7 @@ export default function ProfilePage({ loggedUser, handleLogout }) {
                         loading={loading}
                         addLike={addLike}
                         removeLike={removeLike}
+                        deleteLog={deleteLog}
                         loggedUser={loggedUser}
                     />
                 </Grid.Column>
