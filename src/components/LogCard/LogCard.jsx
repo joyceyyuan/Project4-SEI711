@@ -12,8 +12,6 @@ export default function LogCard({ log, isProfile, addLike, removeLike, deleteLog
         likedIndex > -1
             ? () => removeLike(log.likes[likedIndex]._id) // user has liked the log 
             : () => addLike(log._id);  // user hasn't liked the log handler
-    console.log(log.user.username, "<-log.user.username");
-    console.log(log.user.photoUrl, "<-log.user.photoUrl");
 
     return (
         <Card key={log._id} raised>
@@ -45,7 +43,7 @@ export default function LogCard({ log, isProfile, addLike, removeLike, deleteLog
             <Card.Content extra textAlign={"right"}>
                 <Icon
                     name={"trash alternate outline"}
-                    onClick={deleteLog}
+                    onClick={() => deleteLog(log._id)}
                 />
                 <Icon
                     name={"heart"}

@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { Header, Segment, Image, Icon} from 'semantic-ui-react';
 
 export default function PageHeader({ loggedUser, handleLogout }) {
-    console.log(loggedUser, "loggedUser in pageheader");
     return (
         <Segment clearing>
             <Header as="h3" color='red' floated="right">
@@ -25,7 +24,7 @@ export default function PageHeader({ loggedUser, handleLogout }) {
                         avatar
                     ></Image>
                 </Link>
-                <span>Welcome, {loggedUser.username} </span>
+                <span>Hi, {loggedUser.username} </span>
             </Header>
         </Segment>
     )

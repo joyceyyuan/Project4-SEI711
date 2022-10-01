@@ -54,8 +54,9 @@ export default function Feed({ loggedUser, handleLogout }) {
         }
     }
 
-    async function deleteLog(logId) {
+    async function handleDeleteLog(logId) {
         try {
+            // console.log(logId,"<-logId in handleDeleteLog")
             const response = await logAPI.deleteLog(logId);
             console.log(response,", delete log");
             getLogs();
@@ -65,11 +66,10 @@ export default function Feed({ loggedUser, handleLogout }) {
         }
     }
 
-
     async function getLogs() {
         try {
             const response = await logAPI.getAll();
-            console.log(response, " data");
+            console.log(response, " data from getLogs");
             setLogs([...response.data]);
             setLoading(false);
         } catch (err) {
@@ -120,7 +120,7 @@ export default function Feed({ loggedUser, handleLogout }) {
                         loading={loading}
                         addLike={addLike}
                         removeLike={removeLike}
-                        deleteLog={deleteLog}
+                        deleteLog={handleDeleteLog}
                         loggedUser={loggedUser}
                     />
                 </Grid.Column>

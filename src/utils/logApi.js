@@ -34,6 +34,7 @@ export function getAll() {
 }
 
 export function deleteLog(logId) {
+    console.log(logId,"this is logId in deletelog function logAPI");
     return fetch(`${BASE_URL}/${logId}`, {
         method: 'DELETE',
         headers: {

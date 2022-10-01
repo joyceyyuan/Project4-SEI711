@@ -40,7 +40,7 @@ export default function ProfilePage({ loggedUser, handleLogout }) {
         }
     }
 
-    async function deleteLog(logId) {
+    async function handleDeleteLog(logId) {
         try {
             const response = await logAPI.deleteLog(logId);
             console.log(response, " delete log");
@@ -109,7 +109,7 @@ export default function ProfilePage({ loggedUser, handleLogout }) {
                         loading={loading}
                         addLike={addLike}
                         removeLike={removeLike}
-                        deleteLog={deleteLog}
+                        deleteLog={handleDeleteLog}
                         loggedUser={loggedUser}
                     />
                 </Grid.Column>
