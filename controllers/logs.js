@@ -55,9 +55,7 @@ async function index(req, res) {
 
 async function deleteLog(req, res) {
     try {
-        console.log(req.params,'<-this is req.params.id from deleteLog function');
-        const log = await Log.findByIdAndDelete(req.params._id);
-        await log.save();
+        await Log.findByIdAndDelete(req.params.id);
         res.json({ data: 'log removed' })
     } catch (err) {
         res.status(400).json({ err });

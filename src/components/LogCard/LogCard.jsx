@@ -41,10 +41,13 @@ export default function LogCard({ log, isProfile, addLike, removeLike, deleteLog
                 <Card.Meta>{log.text}</Card.Meta>
             </Card.Content>
             <Card.Content extra textAlign={"right"}>
-                <Icon
-                    name={"trash alternate outline"}
-                    onClick={() => deleteLog(log._id)}
-                />
+                {loggedUser._id === log.user._id ?
+                    <Icon
+                        name={"trash alternate outline"}
+                        onClick={() => deleteLog(log._id)}
+                    /> : <>
+                    </>
+            }
                 <Icon
                     name={"heart"}
                     size="large"

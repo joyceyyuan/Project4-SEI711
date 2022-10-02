@@ -24,9 +24,10 @@ const logSchema = new mongoose.Schema({
     text: String,
     Category: {
         type: String,
-        enum: ['plan', 'record'],
-        default: 'record'
+        enum: ['I am going to', 'I have been to'],
+        default: 'I have been to'
     },
+    location: {type: String, required: true},
     photoUrl: String,
     likes: [likesSchema]
 }, {
