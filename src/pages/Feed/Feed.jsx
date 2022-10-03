@@ -17,7 +17,6 @@ export default function Feed({ loggedUser, handleLogout }) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
-    // functions that will make http request to the /logs/api endpoints
     async function addLike(logId) {
         try {
             const response = await likesAPI.create(logId);
@@ -56,9 +55,8 @@ export default function Feed({ loggedUser, handleLogout }) {
 
     async function handleDeleteLog(logId) {
         try {
-            // console.log(logId,"<-logId in handleDeleteLog")
             const response = await logAPI.deleteLog(logId);
-            console.log(response,", delete log");
+            console.log(response, ", delete log");
             getLogs();
         } catch (err) {
             console.log(err);

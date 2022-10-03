@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Form, TextArea, Segment, Header } from 'semantic-ui-react';
-// import "./AddLog.css";
+import "./AddLog.css";
 
 export default function AddLog({ handleAddLog }) {
     const [logForm, setLogForm] = useState({
@@ -55,8 +55,8 @@ export default function AddLog({ handleAddLog }) {
     }
 
     return (
-        <Segment>
-            <Header as="h2" color='blue'>
+        <div className="form-container">
+            <Header as="h2" color='#4183C4'>
                 Plan, record and share your trips.
             </Header>
             <Form autoComplete="off" onSubmit={handleSubmit}>
@@ -65,12 +65,13 @@ export default function AddLog({ handleAddLog }) {
                         placeholder='Select Category'
                         fluid
                         selection
+                        className="form-input"
                         value={selectedCategory}
                         onChange={(e, data) => setSelectedCategory(data.value)}
                         options={categoryOptions}
                     />
                     <Form.Input
-                        className="form-control"
+                        className="form-input"
                         name="location"
                         value={logForm.location}
                         placeholder="Enter destination"
@@ -80,21 +81,21 @@ export default function AddLog({ handleAddLog }) {
                     />
                 </Form.Group>
                 <Form.Input
-                    className="form-control"
+                    className="form-input"
                     name="title"
                     value={logForm.title}
                     placeholder="Enter title"
-                    style={{ width: 542 }}
+                    style={{ width: 542, textOverflow: 'ellipsis !important'}}
                     onChange={handleChange}
                     inline
                     required
                 />
                 <TextArea
-                    className="form-control"
+                    className="textarea"
                     name="text"
                     value={logForm.text}
                     placeholder="Tell us more about your trip..."
-                    style={{ minHeight: 200 }}
+                    style={{ minHeight: 200, textOverflow: 'ellipsis !important'}}
                     onChange={handleChange}
                 />
                 <Form.Input
@@ -103,7 +104,7 @@ export default function AddLog({ handleAddLog }) {
                     name="photo"
                     label="Upload Image"
                     placeholder="upload image"
-                    style={{ width: 405, margin: 14 }}
+                    style={{ width: 417, margin: 12 }}
                     onChange={handleFileInput}
                     inline
                     required
@@ -118,6 +119,6 @@ export default function AddLog({ handleAddLog }) {
                     Add a trip
                 </Button>
             </Form>
-        </Segment >
+        </div >
     )
 }

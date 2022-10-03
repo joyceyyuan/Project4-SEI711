@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Grid,Icon } from "semantic-ui-react";
+import "./Profile.css";
 import Profile from "../../components/Profile/Profile";
 import LogGallery from "../../components/LogGallery/LogGallery";
 import Header from "../../components/Header/Header";
@@ -52,9 +53,7 @@ export default function ProfilePage({ loggedUser, handleLogout }) {
 
     const getProfile = useCallback(async () => {
         try {
-            const response = await userService.getProfile(username); // this line evaluates to what the server responds to the request with
-            // after we get the response to the server
-            // so lets flip the loading state
+            const response = await userService.getProfile(username);
             setLoading(false);
             setProfileUser(response.data.user);
             setLogs(response.data.logs);

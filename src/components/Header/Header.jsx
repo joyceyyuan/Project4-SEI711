@@ -4,8 +4,8 @@ import { Header, Segment, Image, Icon} from 'semantic-ui-react';
 
 export default function PageHeader({ loggedUser, handleLogout }) {
     return (
-        <Segment clearing>
-            <Header as="h3" color='red' floated="right">
+        <Segment className="header" clearing>
+            <Header floated="right">
                 <Link to="/">
                     <Icon name="home"></Icon>
                 </Link>
@@ -13,7 +13,7 @@ export default function PageHeader({ loggedUser, handleLogout }) {
                     Log Out
                 </Link>
             </Header>
-            <Header as="h3" color='blue' floated="left">
+            <Header floated="left">
                 <Link to={`/${loggedUser?.username}`}>
                     <Image
                         src={
@@ -24,7 +24,7 @@ export default function PageHeader({ loggedUser, handleLogout }) {
                         avatar
                     ></Image>
                 </Link>
-                <span>Hi, {loggedUser.username} </span>
+                <span >Hi, {loggedUser.username} </span>
             </Header>
         </Segment>
     )

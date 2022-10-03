@@ -1,11 +1,9 @@
 import React, { useState } from "react";
+import './SignupPage.css';
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import { Button, Form, Grid, Header, Image, Message, Segment } from "semantic-ui-react";
 import userService from "../../utils/userService";
 import { useNavigate, Link } from "react-router-dom";
-
-// Utility functions that don't pertain to the component can 
-// be defined outside it
 
 function isPasswordMatch(passwordOne, passwordConf) {
   return passwordOne === passwordConf;
@@ -26,8 +24,6 @@ export default function SignUpPage(props) {
 
   const [selectedFile, setSelectedFile] = useState("");
 
-  // initialized the react router hook, which allows you to programatically
-  // change routes, aka after our signup call in the handleSubmit
   const navigate = useNavigate();
 
   function handleChange(e) {
@@ -38,23 +34,14 @@ export default function SignUpPage(props) {
   }
 
   async function handleSubmit(e) {
-    e.preventDefault(); // this stop the browser from submitting the form!
+    e.preventDefault();
 
     if (!isPasswordMatch(state.password, state.passwordConf)) return setError({ message: 'Passwords Must Match!', passwordError: true });
     setError({ message: '', passwordError: false })
-    // Create formData, so we can send over our file, using multipart/formdata header
-    // which sends over the basic inputs, and then the file
 
-    const formData = new FormData(); //< - this constructor from the browser allows us to create data
-    // now we can set key value pairs on the formData
+    const formData = new FormData();
     formData.append("photo", selectedFile);
-    // Line by line tactic
-    // formData.append('username', state.username);
-    // formData.append('email', state.email);
-    // and so on for the rest or our state
 
-    // A more robust way to generate the rest of the formData is using a loop!
-    // loop over our state object using a for ... in loop
     for (let key in state) {
       formData.append(key, state[key]);
     }
@@ -85,27 +72,27 @@ export default function SignUpPage(props) {
   }
 
   return (
-    <>
+    <div className="login-signup-body">
       <Segment clearing>
-        <Header as="h2" color='blue' floated="left">
+        <Header floated="left">
           <Image src="https://cdn-icons-png.flaticon.com/512/744/744502.png" size='small' />
           Welcome to Travelog. Plan, record and share your trips.
         </Header>
       </Segment>
       <Grid
         textAlign="center"
-        style={{ height: "100vh", width: "100vw" }}
+        style={{ height: 1000, width: "100vw" }}
         verticalAlign="middle"
       >
         <Grid.Column style={{ maxWidth: 450 }}>
-          <Header as="h3" color="blue" textAlign="center">
+          <Header textAlign="center">
             Sign Up
           </Header>
           <Form onSubmit={handleSubmit}>
             <Segment stacked>
               <Form.Input
                 name="username"
-                placeholder="username"
+                placeholder="Username"
                 value={state.username}
                 onChange={handleChange}
                 required
@@ -113,7 +100,7 @@ export default function SignUpPage(props) {
               <Form.Input
                 type="email"
                 name="email"
-                placeholder="email"
+                placeholder="Email"
                 value={state.email}
                 onChange={handleChange}
                 required
@@ -122,7 +109,7 @@ export default function SignUpPage(props) {
                 error={error.passwordError}
                 name="password"
                 type="password"
-                placeholder="password"
+                placeholder="Password"
                 value={state.password}
                 onChange={handleChange}
                 required
@@ -140,11 +127,12 @@ export default function SignUpPage(props) {
                 <Form.Input
                   type="file"
                   name="photo"
-                  placeholder="upload image"
+                  placeholder="Upload Image"
                   onChange={handleFileInput}
                 />
               </Form.Field>
-              <Button color="blue"
+              <Button
+                color="blue"
                 fluid
                 size="large"
                 type="submit"
@@ -159,6 +147,6 @@ export default function SignUpPage(props) {
           {error.message ? <ErrorMessage error={error.message} /> : null}
         </Grid.Column>
       </Grid>
-    </>
+    </div>
   );
 }

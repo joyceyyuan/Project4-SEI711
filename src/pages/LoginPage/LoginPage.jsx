@@ -26,20 +26,17 @@ export default function LoginPage(props) {
 
     try {
       await userService.login(state);
-      // Route to wherever you want!
       props.handleSignUpOrLogin();
       navigate("/");
     } catch (err) {
-      // Invalid user data (probably duplicate email)
-      // this is from the throw block in the userService.login first then function
       setError(err.message);
     }
   }
 
   return (
-    <>
+    <div className="login-signup-body">
       <Segment clearing>
-        <Header as="h2" color='blue' floated="left">
+        <Header floated="left">
           <Image src="https://cdn-icons-png.flaticon.com/512/744/744502.png" size='small' />
           Welcome to Travelog. Plan, record and share your trips.
         </Header>
@@ -50,7 +47,7 @@ export default function LoginPage(props) {
         verticalAlign="middle"
       >
         <Grid.Column style={{ maxWidth: 450 }}>
-          <Header as="h2" color="blue" textAlign="center">
+          <Header as="h2" color="#4183C4" textAlign="center">
             Log in
           </Header>
           <Form onSubmit={handleSubmit}>
@@ -88,6 +85,6 @@ export default function LoginPage(props) {
           {error ? <ErrorMessage error={error} /> : null}
         </Grid.Column>
       </Grid>
-    </>
+    </div>
   );
 }
