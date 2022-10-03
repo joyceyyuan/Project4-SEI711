@@ -1,7 +1,7 @@
 # Travelog
 #### In this app, you can either record or plan your trips. This is the place that you can write anything here about a trip such as dates, iteneries, expenses, highlights, journals, etc. You may also upload picture along with a travelog post, and share with others. You are also able to delete your post if you need. 
 
-### Don't forget to find some inspirations for your next trip by checking others' posts and profile page! You may like/unlike a post as well.
+#### Don't forget to find some inspirations for your next trip by checking others' posts and profile page! You may like/unlike a post as well.
 
 # Screenshots
 #### Login Page
