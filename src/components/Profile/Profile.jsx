@@ -1,6 +1,6 @@
 import { Image, Grid, Segment } from "semantic-ui-react";
 
-export default function Profile({ user }) {
+export default function Profile({ user, logsNumber }) {
     return (
         <Grid textAlign="center" columns={2}>
             <Grid.Row>
@@ -16,7 +16,10 @@ export default function Profile({ user }) {
                 </Grid.Column>
                 <Grid.Column textAlign="left" style={{ maxWidth: 600 }}>
                     <Segment vertical>
-                        <h4>{user.username}</h4>
+                        <h2>{user.username}</h2>
+                        <p>
+                            Travelog <strong>{logsNumber}</strong>
+                        </p>
                     </Segment>
                 </Grid.Column>
             </Grid.Row>

@@ -21,7 +21,7 @@ export default function LogCard({ log, isProfile, addLike, removeLike, deleteLog
                 ) : (
                     <Card.Content>
                         <Card.Header>
-                            <Link to={`/${log.user.username}`} textAlign="left">
+                            <Link to={`/${log.user.username}`}>
                                 <Image
                                     size="large"
                                     avatar
@@ -61,7 +61,7 @@ export default function LogCard({ log, isProfile, addLike, removeLike, deleteLog
                         onClose={() => setOpen(false)}
                         onOpen={() => setOpen(true)}
                     >
-                        <Modal.Header>Delete Your Post</Modal.Header>
+                        <Modal.Header>Delete Your Travelog</Modal.Header>
                         <Modal.Content>
                             <p>
                             Are you sure you want to delete it?

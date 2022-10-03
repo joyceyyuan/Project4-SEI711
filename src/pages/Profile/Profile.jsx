@@ -97,7 +97,7 @@ export default function ProfilePage({ loggedUser, handleLogout }) {
             </Grid.Row>
             <Grid.Row>
                 <Grid.Column>
-                    <Profile user={profileUser} />
+                    <Profile user={profileUser} logsNumber={logs.length}/>
                 </Grid.Column>
             </Grid.Row>
             <Grid.Row centered>
