@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { Grid } from "semantic-ui-react";
+import { Grid,Icon } from "semantic-ui-react";
 import Profile from "../../components/Profile/Profile";
 import LogGallery from "../../components/LogGallery/LogGallery";
 import Header from "../../components/Header/Header";
@@ -99,6 +99,11 @@ export default function ProfilePage({ loggedUser, handleLogout }) {
                 <Grid.Column>
                     <Profile user={profileUser} logsNumber={logs.length}/>
                 </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+
+            <span>{logs.category}<Icon name={"point"} />{logs.location}</span>
+
             </Grid.Row>
             <Grid.Row centered>
                 <Grid.Column style={{ maxWidth: 900 }}>

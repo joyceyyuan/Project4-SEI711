@@ -20,7 +20,7 @@ export default function LogCard({ log, isProfile, addLike, removeLike, deleteLog
     return (
         <Card key={log._id} raised>
             {isProfile ? (
-                ""
+                <span>{log.category} <Icon name={"point"}/>{log.location}</span>
             ) : (
                 <Card.Content>
                     <Card.Header>
@@ -37,7 +37,7 @@ export default function LogCard({ log, isProfile, addLike, removeLike, deleteLog
                             {log.user.username}
                         </Link>
                     </Card.Header>
-                    <Card.Description as="h5">{log.category}<Icon name={"point"} />{log.location}</Card.Description>
+                    <Card.Description as="h5">{log.category} <Icon name={"point"}/>{log.location}</Card.Description>
                 </Card.Content>
             )}
             <Image src={`${log?.photoUrl}`} wrapped ui={false} />
