@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Form, TextArea, Segment, Header } from 'semantic-ui-react';
+import { Button, Form, TextArea, Header } from 'semantic-ui-react';
 import "./AddLog.css";
 
 export default function AddLog({ handleAddLog }) {
@@ -25,7 +25,6 @@ export default function AddLog({ handleAddLog }) {
     ]
     const [selectedCategory, setSelectedCategory] = useState("");
 
-    // The function that handles the changes on the input, Look at the inputs for the name of it
     const [selectedFile, setSelectedFile] = useState("");
 
     function handleFileInput(e) {

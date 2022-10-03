@@ -8,6 +8,7 @@
 <img src="https://i.imgur.com/iXwHOXv_d.jpg?maxwidth=520&shape=thumb&fidelity=high">
 
 #### Home Page/Feed Page
+<img src="https://i.imgur.com/l1kirYo.png">
 <img src="https://i.imgur.com/GcEeDVm.png">
 
 #### Profile Page
