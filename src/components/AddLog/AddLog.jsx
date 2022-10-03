@@ -4,8 +4,9 @@ import { Button, Form, TextArea, Segment, Header } from 'semantic-ui-react';
 
 export default function AddLog({handleAddLog}) {
     const [logForm, setLogForm] = useState({
+        location: "",
         title: "",
-        text: ""
+        text: "",
     });
     // The function that handles the changes on the input, Look at the inputs for the name of it
     const [selectedFile, setSelectedFile] = useState("");
@@ -28,6 +29,7 @@ export default function AddLog({handleAddLog}) {
 
         const formData = new FormData();
         formData.append("photo", selectedFile);
+        formData.append("location", logForm.location);
         formData.append("title", logForm.title);
         formData.append("text", logForm.text);
         console.log(formData,'<-this is formData');
@@ -40,6 +42,16 @@ export default function AddLog({handleAddLog}) {
                 Plan, record and share your trips.
             </Header>
             <Form autoComplete="off" onSubmit={handleSubmit}>
+            <Form.Input
+                    className="form-control"
+                    name="location"
+                    value={logForm.location}
+                    placeholder="Enter destination"
+                    style={{ width: 542 }}
+                    onChange={handleChange}
+                    inline
+                    required
+                />
                 <Form.Input
                     className="form-control"
                     name="title"
