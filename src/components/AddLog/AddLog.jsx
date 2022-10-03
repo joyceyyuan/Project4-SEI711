@@ -1,13 +1,30 @@
 import React, { useState } from 'react';
-import { Button, Form, TextArea, Segment, Header } from 'semantic-ui-react';
+import { Button, Form, TextArea, Segment, Header, Dropdown } from 'semantic-ui-react';
 // import "./AddLog.css";
 
-export default function AddLog({handleAddLog}) {
+export default function AddLog({ handleAddLog }) {
     const [logForm, setLogForm] = useState({
+        category: "",
         location: "",
         title: "",
         text: "",
     });
+
+    const categoryOptions = [
+        {
+            key: 'I am going to',
+            text: 'I am going to',
+            value: 'I am going to',
+        },
+        {
+            key: 'I went to',
+            text: 'I went to',
+            value: 'I went to',
+        }
+
+    ]
+    const [selectedCategory, setSelectedCategory] = useState("");
+
     // The function that handles the changes on the input, Look at the inputs for the name of it
     const [selectedFile, setSelectedFile] = useState("");
 
@@ -29,10 +46,11 @@ export default function AddLog({handleAddLog}) {
 
         const formData = new FormData();
         formData.append("photo", selectedFile);
+        formData.append("category", selectedCategory);
         formData.append("location", logForm.location);
         formData.append("title", logForm.title);
         formData.append("text", logForm.text);
-        console.log(formData,'<-this is formData');
+        console.log(formData, '<-this is formData');
         handleAddLog(formData); // formData is the data we want to send to the server!
     }
 
@@ -42,7 +60,15 @@ export default function AddLog({handleAddLog}) {
                 Plan, record and share your trips.
             </Header>
             <Form autoComplete="off" onSubmit={handleSubmit}>
-            <Form.Input
+                <Dropdown
+                    placeholder='Select Category'
+                    fluid
+                    selection
+                    value={selectedCategory}
+                    onChange={(e,data) => setSelectedCategory(data.value)}
+                    options={categoryOptions}
+                />
+                <Form.Input
                     className="form-control"
                     name="location"
                     value={logForm.location}
