@@ -3,7 +3,7 @@ import { Card, Dimmer, Segment, Image } from 'semantic-ui-react'
 import LogCard from '../LogCard/LogCard';
 import Loader from '../Loader/Loader';
 
-export default function LogGallery({ logs, numPhotosCol, isProfile, loading, addLike, removeLike, deleteLog, loggedUser }) {
+export default function LogGallery({ logs, numPhotosCol, isProfile, loading, addLike, removeLike, deleteLog, loggedUser, formattedDate }) {
     return (
         <Card.Group itemsPerRow={numPhotosCol} stackable>
             {loading ? (
@@ -24,9 +24,11 @@ export default function LogGallery({ logs, numPhotosCol, isProfile, loading, add
                         removeLike={removeLike}
                         deleteLog={deleteLog}
                         loggedUser={loggedUser}
+                        formattedDate={formattedDate}
                     />
                 );
-            }).sort()}
+            })
+            .sort((a, b) => b.formattedDate - a.formattedDate)}
         </Card.Group>
     )
 }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Form, TextArea, Segment, Header, Dropdown } from 'semantic-ui-react';
+import { Button, Form, TextArea, Segment, Header } from 'semantic-ui-react';
 // import "./AddLog.css";
 
 export default function AddLog({ handleAddLog }) {
@@ -56,28 +56,29 @@ export default function AddLog({ handleAddLog }) {
 
     return (
         <Segment>
-            <Header as="h2" color='blue' floated="left">
+            <Header as="h2" color='blue'>
                 Plan, record and share your trips.
             </Header>
             <Form autoComplete="off" onSubmit={handleSubmit}>
-                <Dropdown
-                    placeholder='Select Category'
-                    fluid
-                    selection
-                    value={selectedCategory}
-                    onChange={(e,data) => setSelectedCategory(data.value)}
-                    options={categoryOptions}
-                />
-                <Form.Input
-                    className="form-control"
-                    name="location"
-                    value={logForm.location}
-                    placeholder="Enter destination"
-                    style={{ width: 542 }}
-                    onChange={handleChange}
-                    inline
-                    required
-                />
+                <Form.Group widths='equal'>
+                    <Form.Select
+                        placeholder='Select Category'
+                        fluid
+                        selection
+                        value={selectedCategory}
+                        onChange={(e, data) => setSelectedCategory(data.value)}
+                        options={categoryOptions}
+                    />
+                    <Form.Input
+                        className="form-control"
+                        name="location"
+                        value={logForm.location}
+                        placeholder="Enter destination"
+                        onChange={handleChange}
+                        fluid
+                        required
+                    />
+                </Form.Group>
                 <Form.Input
                     className="form-control"
                     name="title"
