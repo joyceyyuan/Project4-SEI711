@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Grid } from "semantic-ui-react";
+import { Grid, Image, Divider } from "semantic-ui-react";
 import "./Feed.css";
 
 import PageHeader from "../../components/Header/Header";
@@ -104,9 +104,18 @@ export default function Feed({ loggedUser, handleLogout }) {
                 </Grid.Column>
             </Grid.Row>
             <Grid.Row>
+                <Image src="https://media4.giphy.com/media/toelXGUsYD6vtCN408/giphy.gif?cid=ecf05e470llw583twkj4zckkaum05juwo4lk3bwv4aijdvo6&rid=giphy.gif&ct=g" size="small" />
+            </Grid.Row>
+            <Grid.Row>
                 <Grid.Column style={{ maxWidth: 600 }}>
                     <AddLog handleAddLog={handleAddLog} />
                 </Grid.Column>
+            </Grid.Row>
+
+            <Divider horizontal className="header">Discover</Divider>
+
+            <Grid.Row>
+                <Image src="https://media3.giphy.com/media/AErExHJVxRbkm5hPkB/giphy.gif?cid=ecf05e476vnne6m7ln12g04a6ky4y4swlc0mthwgoeul2poa&rid=giphy.gif&ct=g" size="small" circular />
             </Grid.Row>
             <Grid.Row>
                 <Grid.Column style={{ maxWidth: 600 }}>
