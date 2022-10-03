@@ -105,7 +105,7 @@ export default function ProfilePage({ loggedUser, handleLogout }) {
 
             </Grid.Row>
             <Grid.Row centered>
-                <Grid.Column style={{ maxWidth: 900 }}>
+                <Grid.Column style={{ maxWidth: 1200 }}>
                     <LogGallery
                         logs={logs}
                         numPhotosCol={3}
