@@ -7,7 +7,8 @@ const likesSchema = mongoose.Schema({
 
 const logSchema = new mongoose.Schema({
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-    category: String,location: String,
+    category: String,
+    location: String,
     title: {type: String, required: true},
     text: String,
     photoUrl: String,

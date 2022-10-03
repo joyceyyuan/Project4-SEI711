@@ -18,7 +18,7 @@ export default function Profile({ user, logsNumber }) {
                     <Segment vertical>
                         <h2>{user.username}</h2>
                         <p className="arial">
-                            Travelog <strong>{logsNumber}</strong>
+                            Travelogs <strong>{logsNumber}</strong>
                         </p>
                     </Segment>
                 </Grid.Column>
