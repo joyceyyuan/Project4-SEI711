@@ -47,7 +47,7 @@ export default function LogCard({ log, isProfile, addLike, removeLike, deleteLog
                 <Card.Description>{log.title}</Card.Description>
                 <Card.Meta>{log.text}</Card.Meta>
             </Card.Content>
-            <Card.Meta textAlign={"right"} className="createdAt">{formattedDate}</Card.Meta>
+            <Card.Meta textAlign={"right"} className="arial">{formattedDate}</Card.Meta>
             <Card.Content extra textAlign={"right"}>
                 {loggedUser._id === log.user._id ?
                     <Modal
